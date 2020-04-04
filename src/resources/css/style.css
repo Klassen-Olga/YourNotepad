@@ -1,0 +1,16 @@
+.registerLabel{
+
+    -fx-padding: 0.6em;
+    -fx-font-family: "DejaVu Sans Mono";
+    -fx-font-size: 37px;
+}
+.registerButton{
+    -fx-padding: 1.4em;
+
+
+}
+.text-field{
+    -fx-font-size: 22;
+
+}
+
