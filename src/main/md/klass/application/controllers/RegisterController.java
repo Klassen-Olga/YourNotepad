@@ -26,7 +26,7 @@ public class RegisterController {
 		User user=new User(firstName.getText(), lastName.getText());
 		boolean userFieldsAreValid=user.validate(errors);
 		if (!userFieldsAreValid){
-			errors.stream().forEach(error->{
+			errors.forEach(error->{
 				if (errorMessage.getText().length()==0){
 					errorMessage.setText(error);
 				}
