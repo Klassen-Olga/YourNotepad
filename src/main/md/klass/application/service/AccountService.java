@@ -5,7 +5,6 @@ import md.klass.application.repository.AccountRepository;
 import md.klass.application.validation.AccountValidator;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AccountService extends AbstractService<Account> {
@@ -18,7 +17,7 @@ public class AccountService extends AbstractService<Account> {
 
 	@Override
 	public List<String> validate(Account account) {
-		List<String> errors = new ArrayList<>(this.validator.validate(account));
+		List<String> errors = this.validator.validate(account);
 
 		if (!AccountRepository.isUsernameUnique(account)) {
 			errors.add("User with this username already exists");
@@ -29,6 +28,10 @@ public class AccountService extends AbstractService<Account> {
 	@Override
 	public List<String> save(Connection connection, Account model) {
 		return this.repository.insert(connection, model);
+	}
+
+	public String getPasswordFromUser(Account account){
+		return AccountRepository.getPasswordFromUser(account);
 	}
 
 }

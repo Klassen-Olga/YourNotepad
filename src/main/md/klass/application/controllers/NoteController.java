@@ -8,7 +8,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 
-public class NoteController {
+public class NoteController extends  AbstractController{
 	@FXML
 	public HTMLEditor editor;
 	public WebView noteWebview;

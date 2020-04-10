@@ -13,5 +13,6 @@
             fx:controller="md.klass.application.controllers.NoteController"
             prefHeight="400.0" prefWidth="600.0">
     <HTMLEditor fx:id="editor"/>
+    <Label fx:id="errorMessage"/>
     <Button fx:id="saveNote" onMouseClicked="#saveNote" text="Save"/>
 </VBox>

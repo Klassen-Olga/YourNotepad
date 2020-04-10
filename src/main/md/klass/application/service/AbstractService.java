@@ -10,8 +10,8 @@ import java.util.List;
 
 public abstract class AbstractService<T extends AbstractBaseModel> {
 
-	protected Validator validator;
-	protected AbstractRepository repository;
+	protected Validator<T> validator;
+	protected AbstractRepository<T> repository;
 	public abstract List<String> validate(T model);
 
 	/**

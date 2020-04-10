@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountRepository extends AbstractRepository<Account> {
+	private static List<String> errors;
 
 	public AccountRepository(){
 		this.tableName="Account";
 		this.SQL=" insert into Account(username, password, userId) values(?,?,?); ";
+		errors=new ArrayList<>();
 	}
 	@Override
 	public void insertOperation(PreparedStatement preparedStatement, Account account) throws SQLException, IllegalArgumentException {
@@ -24,13 +26,13 @@ public class AccountRepository extends AbstractRepository<Account> {
 	}
 
 	public static boolean isUsernameUnique( Account account){
-		List<String> errors=new ArrayList<>();
 		ResultSet resultSet=null;
 		Connection connection=getConnection();
 
 		if (connection!=null){
-			String SQL="select * from Account  where username= '"+account.getUsername()+"'";
+			String SQL="select * from Account  where username= ?";
 			try(PreparedStatement preparedStatement= connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)){
+				preparedStatement.setString(1,account.getUsername());
 				resultSet=preparedStatement.executeQuery();
 				if (!resultSet.next()){
 					return true;
@@ -47,5 +49,29 @@ public class AccountRepository extends AbstractRepository<Account> {
 
 		}
 		return false;
+	}
+	public static String getPasswordFromUser(Account account){
+		Connection connection=getConnection();
+		if (connection!=null){
+			String SQL="select * from Account  where username= '"+account.getUsername()+"'";
+			try(PreparedStatement preparedStatement= connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)){
+				ResultSet resultSet=preparedStatement.executeQuery();
+				if (!resultSet.next()){
+					return null;
+				}
+				else{
+					return resultSet.getString(3);
+				}
+			}catch (SQLException e){
+				errors.add(e.getMessage());
+			}
+			finally {
+				AbstractRepository.closeConnectionAndCommitOrRollback(connection, true);
+			}
+		}
+		else{
+			errors.add("Please come back later, the database server doesn't work");
+		}
+		return null;
 	}
 }
