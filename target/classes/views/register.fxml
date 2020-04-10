@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<BorderPane prefHeight="476.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="md.klass.application.controllers.RegisterController">
+    <left>
+        <Pane prefWidth="190.0" style="-fx-background-color: #1769a0;"/>
+    </left>
+    <center>
+        <BorderPane>
+            <top>
+                <Label styleClass="registerLabel" prefHeight="90.0" prefWidth="379.0" text="Basic details" textFill="#1769a0"/>
+            </top>
+            <center>
+
+                    <VBox maxWidth="350" alignment="CENTER">
+                        <Label fx:id="errorMessage"/>
+                        <TextField styleClass="tf" fx:id="firstName" focusTraversable="false" promptText="First name">
+                            <VBox.margin>
+                                <Insets bottom="40.0" top="50.0"/>
+                            </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="lastName" focusTraversable="false" prefHeight="33.0"
+                                   prefWidth="299.0" promptText="Last name">
+                            <VBox.margin>
+                                <Insets bottom="40.0"/>
+                            </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="username" focusTraversable="false"  prefHeight="33.0"
+                                   prefWidth="299.0" promptText="Username">
+                            <VBox.margin>
+                                <Insets bottom="40.0"/>
+                            </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="password" focusTraversable="false" prefHeight="33.0"
+                                   prefWidth="299.0" promptText="Password">
+                        </TextField>
+                    </VBox>
+            </center>
+            <bottom>
+                <HBox styleClass="registerButton" alignment="CENTER_RIGHT">
+                    <Button onMouseClicked="#signUp" prefHeight="42.0" prefWidth="165.0"
+                            style="-fx-background-color: #1769a0" text="Sign-Up" textFill="white">
+                    </Button>
+                </HBox>
+            </bottom>
+        </BorderPane>
+
+    </center>
+
+
+</BorderPane>
