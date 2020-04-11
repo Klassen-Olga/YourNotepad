@@ -16,7 +16,7 @@ public class AccountValidator implements Validator<Account> {
 				errors.add("Username too short");
 			}
 			if (account.getPassword().length() < 6) {
-				errors.add("Password should than 5 symbols");
+				errors.add("Password should not be less than 5 symbols");
 			}
 		}
 		if (!account.getPassword().matches("^(?=.*[a-zA-Z])(?=.*[0-9]).{5,}$")) {

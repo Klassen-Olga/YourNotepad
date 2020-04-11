@@ -19,7 +19,7 @@ public class AccountService extends AbstractService<Account> {
 	public List<String> validate(Account account) {
 		List<String> errors = this.validator.validate(account);
 
-		if (!AccountRepository.isUsernameUnique(account)) {
+		if (AccountRepository.findAccountViaUsername(account.getUsername())!=null) {
 			errors.add("User with this username already exists");
 		}
 		return errors;
@@ -31,7 +31,12 @@ public class AccountService extends AbstractService<Account> {
 	}
 
 	public String getPasswordFromUser(Account account){
-		return AccountRepository.getPasswordFromUser(account);
+		if (AccountRepository.findAccountViaUsername(account.getUsername())!=null){
+			return AccountRepository.findAccountViaUsername(account.getUsername()).getPassword();
+		}
+		else{
+			return null;
+		}
 	}
 
 }

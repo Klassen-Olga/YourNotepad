@@ -36,7 +36,7 @@ public class Main extends Application {
 		//определение интерфейса из файла, используется метод getClass().getResource("Main.fxml").
 		this.primaryStage = stage;
 		Navigator.setStage(stage);
-		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("views/register.fxml"));
+		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("views/login.fxml"));
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getClassLoader().getResource("css/style.css").toString());
 
