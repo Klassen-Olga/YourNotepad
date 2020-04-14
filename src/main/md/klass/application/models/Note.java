@@ -18,6 +18,10 @@ public class Note extends AbstractBaseModel {
 		this.title=title;
 		this.accountId=accountId;
 	}
+	public Note(int id, String title, String html, int accountId){
+		this(title, html, accountId);
+		this.id=id;
+	}
 
 	public String getTitle() {
 		return title;

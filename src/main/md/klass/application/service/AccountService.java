@@ -17,8 +17,11 @@ public class AccountService extends AbstractService<Account> {
 
 	@Override
 	public List<String> validate(Account account) {
-		List<String> errors = this.validator.validate(account);
+		return this.validator.validate(account);
 
+	}
+	public List<String> validateSignUp(Account account){
+		List<String> errors=this.validate(account);
 		if (AccountRepository.findAccountViaUsername(account.getUsername())!=null) {
 			errors.add("User with this username already exists");
 		}
@@ -37,6 +40,9 @@ public class AccountService extends AbstractService<Account> {
 		else{
 			return null;
 		}
+	}
+	public Account getAccountViaUsername(String username){
+		return AccountRepository.findAccountViaUsername(username);
 	}
 
 }

@@ -1,6 +1,5 @@
 package md.klass.application.validation;
 
-import md.klass.application.models.AbstractBaseModel;
 import md.klass.application.models.User;
 
 import java.util.ArrayList;

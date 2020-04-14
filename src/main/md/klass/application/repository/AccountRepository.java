@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountRepository extends AbstractRepository<Account> {
-	private static List<String> errors;
+
 
 	public AccountRepository(){
 		this.tableName="Account";
@@ -21,7 +21,7 @@ public class AccountRepository extends AbstractRepository<Account> {
 			preparedStatement.setString(1, account.getUsername());
 			preparedStatement.setString(2, account.getPassword());
 			preparedStatement.setInt(3, account.getUserId());
-			preparedStatement.executeUpdate();
+				preparedStatement.executeUpdate();
 			account.setId(this.getId(preparedStatement));
 
 	}
@@ -33,14 +33,16 @@ public class AccountRepository extends AbstractRepository<Account> {
 			try(PreparedStatement preparedStatement= connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)){
 				preparedStatement.setString(1,username);
 				ResultSet resultSet=preparedStatement.executeQuery();
+				//ResultSet to entity
 				if (!resultSet.next()){
 					return null;
 				}
 				else{
+					int id=resultSet.getInt(1);
 					String usernameDb=resultSet.getString(2);
 					String passwordHash=resultSet.getString(3);
 					int accountId=Integer.parseInt(resultSet.getString(4));
-					return new Account(usernameDb, passwordHash,accountId);
+					return new Account(id,usernameDb, passwordHash,accountId);
 				}
 			}catch (SQLException e){
 				errors.add(e.getMessage());

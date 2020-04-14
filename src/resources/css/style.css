@@ -5,12 +5,88 @@
     -fx-font-size: 37px;
 }
 .registerButton{
-    -fx-padding: 1.4em;
+    -fx-background-color: #1769a0;
+    -fx-pref-width: 165.0;
+    -fx-min-height: 42.0;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-text-alignment: center;
 
+}
+.vboxSignUp{
+    -fx-padding: 1.3em;
+    -fx-alignment: center-right;
+}
+.loginButton:hover, .registerButton:hover{
+    -fx-background-color: #0006ac;
 
+}
+.loginButton{
+    -fx-padding: 1em;
+    -fx-background-color: #1769a0;
+    -fx-pref-width: 100.0;
+    -fx-min-height: 5.0;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-font-size: 15;
+}
+.errorMessage{
+    -fx-text-fill: darkred;
+
+}
+.accountFalse{
+    -fx-padding: 0.3em;
+    -fx-alignment:bottom-right;
 }
 .text-field{
     -fx-font-size: 22;
 
 }
+.loginCenter, .loginCenterHBox{
+    -fx-alignment: center;
+    -fx-padding: 10;
+}
+.loginCenterHBox{
+    -fx-padding: 10px;
+}
+
+
+/*
+*
+*NotesView
+*
+*/
+.notesViewVBox{
+    -fx-alignment: center;
+}
+.glyph-icon{
+    -fx-font-size: 30px;
+    -fx-fill: #1769a0;
+    -fx-font-family:"FontAwesome";
+}
+.plus-button{
+    -fx-background-radius: 25px 25px;
+    -fx-text-alignment: center;
+    -fx-background-color: white;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+
+}
+
+.bluePane{
+    -fx-padding: 1.3em;
+    -fx-alignment: center-right;
+}
+.newNoteLabel{
+    -fx-label-padding: 1.3em;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+.yourNotesLabel{
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+ }
+
 

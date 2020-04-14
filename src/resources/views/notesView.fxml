@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="md.klass.application.controllers.NotesViewController"
+            prefHeight="400.0" prefWidth="600.0">
+    <left>
+        <BorderPane  styleClass="bluePane" prefWidth="190.0" style="-fx-background-color: #1769a0;">
+            <top>
+                <HBox>
+
+                    <Button  styleClass="plus-button" onMouseClicked="#addNewNote">
+                        <graphic>
+                            <FontAwesomeIconView glyphName="PLUS" />
+                        </graphic>
+                    </Button>
+                    <Label onMouseClicked="#addNewNote" styleClass="newNoteLabel" text="New Note"/>
+
+                </HBox>
+
+            </top>
+        </BorderPane>
+    </left>
+    <center>
+        <VBox styleClass="notesViewVBox" fx:id="container">
+            <Label styleClass="yourNotesLabel" text="Your notes: " fx:id="yourNotes"/>
+        </VBox>
+    </center>
+
+
+</BorderPane>

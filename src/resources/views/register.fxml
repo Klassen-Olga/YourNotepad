@@ -16,7 +16,7 @@
             </top>
             <center>
                 <VBox fx:id="vtext" maxWidth="350" alignment="CENTER">
-                    <Label fx:id="errorMessage"/>
+                    <Label styleClass="errorMessage" fx:id="errorMessage"/>
 
                         <TextField  styleClass="tf" fx:id="firstName" promptText="First name">
                             <VBox.margin>
@@ -41,11 +41,13 @@
                 </VBox>
             </center>
             <bottom>
-                <HBox styleClass="registerButton" alignment="CENTER_RIGHT">
-                    <Button onMouseClicked="#signUp" prefHeight="42.0" prefWidth="165.0"
-                            style="-fx-background-color: #1769a0" text="Sign-Up" textFill="white">
-                    </Button>
-                </HBox>
+<VBox styleClass="vboxSignUp">
+    <Button styleClass="registerButton" onMouseClicked="#signUp"
+            text="Sign-Up" textFill="white">
+    </Button>
+</VBox>
+
+
             </bottom>
         </BorderPane>
 

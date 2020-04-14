@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<VBox spacing="10" fx:id="root" alignment="CENTER" prefHeight="310.0" prefWidth="453.0"
-      xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="md.klass.application.controllers.LoginController">
-    <Label fx:id="errorMessage"/>
+<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<BorderPane prefHeight="476.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="md.klass.application.controllers.LoginController">
+    <left>
+        <Pane prefWidth="190.0" style="-fx-background-color: #1769a0;"/>
 
+    </left>
+    <center>
+        <VBox styleClass="loginCenter">
+            <Label styleClass="errorMessage" fx:id="errorMessage"/>
+            <HBox styleClass="loginCenterHBox">
+                <Label text="Username: "/>
+                <TextField fx:id="username" alignment="TOP_CENTER"/>
+            </HBox>
+            <HBox styleClass="loginCenterHBox">
+                <Label text="Password: "/>
+                <PasswordField fx:id="password" alignment="TOP_CENTER"/>
+            </HBox>
+            <Button styleClass="loginButton" fx:id="button" onAction="#login" text="Login"/>
+            <Label styleClass="accountFalse" text="Dont have any account? "/>
+            <Hyperlink fx:id="signup" text="Sign-up" onMouseClicked="#signup"/>
+        </VBox>
+    </center>
+</BorderPane>
 
-    <HBox alignment="TOP_CENTER">
-        <Label alignment="TOP_CENTER" text="Username: "/>
-        <TextField fx:id="username" alignment="TOP_CENTER"/>
-    </HBox>
-    <HBox alignment="CENTER">
-        <Label text="Password: "/>
-        <TextField fx:id="password" alignment="TOP_CENTER"/>
-    </HBox>
-    <Button fx:id="button" alignment="CENTER" contentDisplay="CENTER" onAction="#login" text="Login"/>
-    <Label text="Dont have any account? "/>
-    <Button fx:id="signup" text="Sign-up" onMouseClicked="#signup"/>
-</VBox>

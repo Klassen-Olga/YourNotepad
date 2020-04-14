@@ -10,7 +10,8 @@ public class Account extends AbstractBaseModel {
 		this.password=password;
 		this.username=username;
 	}
-	public Account(String username, String password, int userId){
+	public Account(int id, String username, String password, int userId){
+		this.id=id;
 		this.password=password;
 		this.username=username;
 		this.userId=userId;

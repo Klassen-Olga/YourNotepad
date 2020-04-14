@@ -6,6 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import md.klass.application.models.Account;
 import md.klass.application.models.User;
+import md.klass.application.navigation.ControllerArgument;
 import md.klass.application.navigation.Navigator;
 import md.klass.application.repository.AbstractRepository;
 import md.klass.application.service.AbstractService;
@@ -54,7 +55,7 @@ public class RegisterController extends AbstractController {
 
 		//Validation
 		errors.addAll(userService.validate(user));
-		errors.addAll(accountService.validate(account));
+		errors.addAll(accountService.validateSignUp(account));
 		if (errors.size() > 0) {
 			printErrors(errors);
 			return;
@@ -88,4 +89,13 @@ public class RegisterController extends AbstractController {
 	}
 
 
+	@Override
+	public <T> void setInput(ControllerArgument<T> argument) {
+
+	}
+
+	@Override
+	public void beforeBegin() {
+
+	}
 }

@@ -11,7 +11,7 @@ public abstract class AbstractRepository<T extends AbstractBaseModel> {
 
 	protected String SQL;
 	protected static String tableName;
-	private static List<String> errors;
+	protected static List<String> errors;
 	public AbstractRepository(){
 		errors=new ArrayList<>();
 	}
