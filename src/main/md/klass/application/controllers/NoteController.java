@@ -18,6 +18,7 @@ import md.klass.application.service.NoteService;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
@@ -30,6 +31,7 @@ public class NoteController extends  AbstractController implements Initializable
 	private Integer noteId;
 	NoteService noteService;
 	AccountService accountService;
+
 	public NoteController(){
 		noteService=new NoteService();
 		accountService=new AccountService();
@@ -42,19 +44,21 @@ public class NoteController extends  AbstractController implements Initializable
 		webEngine.loadContent(editor.getHtmlText());
 	}
 	public void saveNote(MouseEvent mouseEvent) {
-		String html=editor.getHtmlText();
-		Account account = accountService.getAccountViaUsername(username);
-		int id=account.getId();
-		Note note=new Note("Title", html,account.getId());
-		Connection connection=AccountService.getConnection();
-		noteService.save(connection, note);
-		AbstractRepository.closeConnectionAndCommitOrRollback(connection, true);
+		try{
+			String html=editor.getHtmlText();
+			Account account = accountService.getAccountViaUsername(username);
+			int id=account.getId();
+			Note note=new Note("Title", html,account.getId());
+			noteService.save(note);
+		}catch (SQLException e){
+			printError("Server does not answer, come back later");
+		}
+
 	}
 
 	/**
 	 * @param argument is integer if user had clicked on existed note and wants update it
 	 *                 or it is String and user wants to create a new note
-	 * @param <T>
 	 */
 	@Override
 	public <T> void setInput(ControllerArgument<T> argument) {
@@ -69,8 +73,13 @@ public class NoteController extends  AbstractController implements Initializable
 	@Override
 	public void beforeBegin() {
 		if (noteId!=null){
-			Note note =noteService.findNoteViaId(noteId);
-			editor.setHtmlText(note.getHtml());
+			try{
+				Note note =noteService.findNoteViaId(noteId);
+				editor.setHtmlText(note.getHtml());
+			}catch (SQLException e){
+				printError("Server does not answer, come back later");
+			}
+
 		}
 
 	}

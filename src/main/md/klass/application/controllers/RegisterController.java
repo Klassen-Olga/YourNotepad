@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,44 +49,28 @@ public class RegisterController extends AbstractController {
 
 	public void signUp(MouseEvent mouseEvent) {
 
-		List<String> errors = new ArrayList<>();
-		User user = new User(firstName.getText(), lastName.getText());
-		Account account = new Account(username.getText(), password.getText());
+		try{
+			List<String> errors = new ArrayList<>();
+			User user = new User(firstName.getText(), lastName.getText());
+			Account account = new Account(username.getText(), password.getText());
 
-
-		//Validation
-		errors.addAll(userService.validate(user));
-		errors.addAll(accountService.validateSignUp(account));
-		if (errors.size() > 0) {
-			printErrors(errors);
-			return;
-		}
-		account.setPassword(new BCryptPasswordEncoder().encode(account.getPassword()));
-
-		//Database connection stuff
-		Connection connection = AbstractService.getConnection();
-		if (connection == null) {
-			errors.add("Please come back later, the database server doesn't work");
-			printErrors(errors);
-			return;
-		}
-		userService.save(connection, user);
-		account.setUserId(user.getId());
-		accountService.save(connection, account);
-
-		if (errors.size() == 0) {
-			AbstractRepository.closeConnectionAndCommitOrRollback(connection, true);
-			try{
-				Navigator.navigateTo("login");
-			}catch (IOException e){
-				printError("Server does not work correctly");
+			//Validation
+			errors.addAll(userService.validate(user));
+			errors.addAll(accountService.validateSignUp(account));
+			if (errors.size() > 0) {
+				printErrors(errors);
+				return;
 			}
+			account.setPassword(new BCryptPasswordEncoder().encode(account.getPassword()));
 
-		} else {
-			AbstractRepository.closeConnectionAndCommitOrRollback(connection, false);
-			printErrors(errors);
+			//Database connection stuff
+			userService.save(user);
+			account.setUserId(user.getId());
+			accountService.save(account);
+			Navigator.navigateTo("login");
+		}catch (SQLException | IOException e1){
+			printError("Server does not answer, come back later");
 		}
-
 	}
 
 

@@ -43,27 +43,6 @@ public class Navigator {
 		primaryStage.show();
 		primaryStage.setTitle(view + " page");
 	}
-/*	private static FXMLLoader setPrimaryStage(String view) throws IOException{
-		if (Navigator.primaryStage == null) {
-			throw new IOException();
-		}
-		FXMLLoader fxmlLoader = new FXMLLoader(Navigator.class.getClassLoader().getResource("views/" + view + ".fxml"));
-		Parent root = fxmlLoader.load();
-		primaryStage.getScene().setRoot(root);
-
-		primaryStage.show();
-		primaryStage.setTitle(view + " page");
-		return fxmlLoader;
-	}
-	public static void navigateTo(String view) throws IOException{
-		setPrimaryStage(view);
-	}
-
-	public static <T> void navigateTo(String view, ControllerArgument<T> argument) throws IOException {
-		FXMLLoader fxmlLoader= setPrimaryStage(view);
-		fxmlLoader.<AbstractController>getController().setInput(argument);
-
-	}*/
 
 
 	public static Navigator getNavigator() {

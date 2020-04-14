@@ -1,15 +1,10 @@
 package md.klass.application.controllers;
 
-import de.jensd.fx.glyphs.GlyphsDude;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import md.klass.application.models.Account;
 import md.klass.application.navigation.ControllerArgument;
 import md.klass.application.navigation.Navigator;
@@ -17,9 +12,8 @@ import md.klass.application.service.AccountService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.IOException;
-import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.ResourceBundle;
 
 
 public class LoginController extends AbstractController {
@@ -42,33 +36,36 @@ public class LoginController extends AbstractController {
 	private void login(ActionEvent event) {
 
 		Account account = new Account(username.getText(), password.getText());
-		List<String>errors= accountService.validate(account);
-		if (errors.size()>0){
+		List<String> errors = accountService.validate(account);
+		if (errors.size() > 0) {
 			printErrors(errors);
 			return;
 		}
-		String passwordHash = accountService.getPasswordFromUser(account);
-		if (passwordHash == null) {
-			printError("There is no user with this username");
-			return;
-		}
-		if (new BCryptPasswordEncoder().matches(password.getText(), passwordHash)) {
-			printError("You have successfully signed in");
-			try {
-				Navigator.navigateTo("notesView", new ControllerArgument<>(account.getUsername()));
-			} catch (IOException e) {
-				printError(e.getMessage());
-				System.out.println(e.getMessage());
+		try {
+			String passwordHash = accountService.getPasswordHashFromUser(account);
+			if (passwordHash == null) {
+				printError("There is no user with this username");
+				return;
 			}
-		} else {
-			printError("Username or password is wrong");
+			if (new BCryptPasswordEncoder().matches(password.getText(), passwordHash)) {
+				Navigator.navigateTo("notesView", new ControllerArgument<>(account.getUsername()));
+			} else {
+				printError("Username or password is wrong");
+			}
+
+		} catch (SQLException | IOException e) {
+			printError("Server does not answer, come back later");
 		}
 
 	}
 
 	@FXML
 	private void signup() throws IOException {
-		Navigator.navigateTo("register");
+		try {
+			Navigator.navigateTo("register");
+		}catch (IOException e){
+			printError("Server does not answer, come back later");
+		}
 	}
 
 	@Override

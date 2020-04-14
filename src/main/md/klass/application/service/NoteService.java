@@ -6,9 +6,10 @@ import md.klass.application.repository.NoteRepository;
 import md.klass.application.validation.NoteValidator;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
-public class NoteService extends AbstractService<Note> {
+public class NoteService extends AbstractService<Note, Integer, String > {
 
 	public NoteService(){
 		this.repository=new NoteRepository();
@@ -19,13 +20,13 @@ public class NoteService extends AbstractService<Note> {
 		return validator.validate(note);
 	}
 	@Override
-	public List<String> save(Connection connection, Note note){
-		return repository.insert(connection, note);
+	public void save(Note note) throws SQLException {
+		repository.insert(note);
 	}
-	public List<Note> findAllNotesViaUsername(String username){
-		return NoteRepository.findAllNotesViaUsername(username);
+	public List<Note> findAllNotesViaUsername(String username) throws SQLException {
+		return this.repository.findMultiple(username);
 	}
-	public Note findNoteViaId(int id){
-		return NoteRepository.findNoteViaId(id);
+	public Note findNoteViaId(int id) throws SQLException {
+		return this.repository.findOne(id);
 	}
 }

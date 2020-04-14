@@ -4,10 +4,10 @@ import md.klass.application.models.Account;
 import md.klass.application.repository.AccountRepository;
 import md.klass.application.validation.AccountValidator;
 
-import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
-public class AccountService extends AbstractService<Account> {
+public class AccountService extends AbstractService<Account, String, String> {
 
 
 	public AccountService() {
@@ -20,29 +20,36 @@ public class AccountService extends AbstractService<Account> {
 		return this.validator.validate(account);
 
 	}
-	public List<String> validateSignUp(Account account){
-		List<String> errors=this.validate(account);
-		if (AccountRepository.findAccountViaUsername(account.getUsername())!=null) {
+
+	public List<String> validateSignUp(Account account) throws SQLException {
+		List<String> errors = this.validate(account);
+		Account account1 = repository.findOne(account.getUsername());
+		if (account1 != null) {
 			errors.add("User with this username already exists");
 		}
 		return errors;
 	}
 
 	@Override
-	public List<String> save(Connection connection, Account model) {
-		return this.repository.insert(connection, model);
+	public void save(Account model) throws SQLException {
+
+		this.repository.insert(model);
+
 	}
 
-	public String getPasswordFromUser(Account account){
-		if (AccountRepository.findAccountViaUsername(account.getUsername())!=null){
-			return AccountRepository.findAccountViaUsername(account.getUsername()).getPassword();
-		}
-		else{
+	public String getPasswordHashFromUser(Account account) throws SQLException {
+
+		Account account1 = this.repository.findOne(account.getUsername());
+		if (account1 == null) {
 			return null;
+		} else {
+			return account1.getPassword();
 		}
+
 	}
-	public Account getAccountViaUsername(String username){
-		return AccountRepository.findAccountViaUsername(username);
+
+	public Account getAccountViaUsername(String username) throws SQLException {
+		return this.repository.findOne(username);
 	}
 
 }

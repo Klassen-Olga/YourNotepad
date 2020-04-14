@@ -10,6 +10,10 @@ public class User extends AbstractBaseModel{
 		this.lastName=lastName;
 
 	}
+	public User(int id, String firstName, String lastName){
+		this(firstName, lastName);
+		this.id=id;
+	}
 
 	public String getFirstName() {
 		return this.firstName;

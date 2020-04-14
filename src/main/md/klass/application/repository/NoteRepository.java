@@ -1,5 +1,7 @@
 package md.klass.application.repository;
 
+import md.klass.application.database.DataSource;
+import md.klass.application.mapping.RowMapper;
 import md.klass.application.models.Account;
 import md.klass.application.models.Note;
 
@@ -7,12 +9,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoteRepository extends AbstractRepository<Note> {
+public class NoteRepository extends AbstractRepository<Note, Integer, String> implements RowMapper<Note>{
 
 
 	public NoteRepository() {
 		this.SQL = " insert into Note(title, html, accountId) values(?,?,?); ";
-		errors=new ArrayList<>();
 	}
 
 	@Override
@@ -26,59 +27,51 @@ public class NoteRepository extends AbstractRepository<Note> {
 
 	}
 
-	public static List<Note> findAllNotesViaUsername(String username) {
-		Connection connection = getConnection();
-		if (connection != null) {
-			String SQL = "select * from Note  where accountId= ?";
-			Account account = AccountRepository.findAccountViaUsername(username);
-			List<Note> notes = new ArrayList<>();
-			if (account == null) {
-				return null;
-			}
-			try (PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
-				preparedStatement.setInt(1, account.getId());
-				ResultSet resultSet = preparedStatement.executeQuery();
-
-				while (resultSet.next()) {
-					int id = resultSet.getInt(1);
-					String title = resultSet.getString(2);
-					String html = resultSet.getString(3);
-					int accountId = Integer.parseInt(resultSet.getString(4));
-					notes.add( new Note(id, title, html, accountId));
-				}
-				return notes;
-
-			} catch (SQLException e) {
-				errors.add(e.getMessage());
-			} finally {
-				AbstractRepository.closeConnectionAndCommitOrRollback(connection, true);
-			}
-		} else {
-			errors.add("Please come back later, the database server doesn't work");
-		}
-		return null;
+	@Override
+	public Note map(ResultSet resultSet) throws SQLException {
+		int id = resultSet.getInt(1);
+		String title = resultSet.getString(2);
+		String html = resultSet.getString(3);
+		int accountId = resultSet.getInt(4);
+		return new Note(id, title, html, accountId);
 	}
-	public static Note findNoteViaId(int id){
-		Connection connection = getConnection();
-		if (connection != null) {
-			String SQL = "select * from Note  where id= ?";
-			try (PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
-				preparedStatement.setInt(1,id);
-				ResultSet resultSet = preparedStatement.executeQuery();
 
-				while (resultSet.next()) {
-					return new Note(id, resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4));
-				}
-
-			} catch (SQLException e) {
-				errors.add(e.getMessage());
-			} finally {
-				AbstractRepository.closeConnectionAndCommitOrRollback(connection, true);
+	/**
+	 * @param id is an id we need to find note, which should be updated
+	 * @return
+	 */
+	@Override
+	public Note findOne(Integer id) throws SQLException {
+		String SQL = "select * from Note  where id= ?";
+		try (Connection connection = DataSource.getConnection();
+			 PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				return this.map(resultSet);
 			}
-		} else {
-			errors.add("Please come back later, the database server doesn't work");
+
 		}
 		return null;
+
+	}
+	@Override
+	public List<Note> findMultiple (String username) throws SQLException {
+		String SQL = "select * from Note  where accountId= ?";
+		AccountRepository accountRepository=new AccountRepository();
+		Account account = accountRepository.findOne(username);
+		try (Connection connection = DataSource.getConnection();
+			 PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+			preparedStatement.setInt(1, account.getId());
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<Note> notes=new ArrayList<>();
+			while (resultSet.next()) {
+				notes.add(this.map(resultSet));
+			}
+			return notes;
+		}
+
 	}
 
 }
+

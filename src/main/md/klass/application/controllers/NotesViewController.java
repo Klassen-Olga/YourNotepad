@@ -16,6 +16,7 @@ import md.klass.application.service.NoteService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -43,12 +44,20 @@ public class NotesViewController extends AbstractController implements Initializ
 
 	}
 
+	/**
+	 * If user had before login some saved notes, we should print them
+	 */
 	@Override
 	public void beforeBegin() {
 		if (usernameFromLoginController == null) {
 			return;
 		}
-		List<Note> notes = noteService.findAllNotesViaUsername(usernameFromLoginController);
+		List<Note> notes = null;
+		try {
+			notes = noteService.findAllNotesViaUsername(usernameFromLoginController);
+		} catch (SQLException e) {
+			printError("Server does not answer, come back later");
+		}
 		if (notes.size() == 0) {
 			this.yourNotes.setText("You don't have any note yet");
 		}
