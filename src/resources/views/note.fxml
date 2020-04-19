@@ -1,26 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.web.HTMLEditor?>
-<?import javafx.scene.web.WebView?>
-<BorderPane prefHeight="476.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="md.klass.application.controllers.NoteController">
-    <left>
-        <Pane prefWidth="190.0" style="-fx-background-color: #1769a0;"/>
-    </left>
-    <center>
-        <VBox>
-            <Label fx:id="errorMessage"/>
-            <HTMLEditor fx:id="editor"/>
-
-            <Button fx:id="saveNote" onMouseClicked="#saveNote" text="Save"/>
-        </VBox>
-
-    </center>
-
-</BorderPane>
+<StackPane fx:id="stackPane" prefHeight="476.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="md.klass.application.controllers.NoteController">
+    <BorderPane>
+        <left>
+            <BorderPane styleClass="bluePane" prefWidth="190.0" style="-fx-background-color: #1769a0;">
+                <top>
+                    <VBox>
+                        <Button styleClass="icon-button, saveNote-button" text="Save" onMouseClicked="#saveNote">
+                            <VBox.margin>
+                                <Insets bottom="30.0"/>
+                            </VBox.margin>
+                        </Button>
+                        <Button styleClass="icon-button, back-button" onMouseClicked="#goBackward" text="Back">
+                            <VBox.margin>
+                                <Insets bottom="30.0"/>
+                            </VBox.margin>
+                        </Button>
+                        <Button styleClass="icon-button, logout-button" onMouseClicked="#logout" text="Logout">
+                            <VBox.margin>
+                                <Insets bottom="30.0"/>
+                            </VBox.margin>
+                        </Button>
+                        <Button styleClass="icon-button, deleteNote-button" onMouseClicked="#delete" text="Delete"/>
+                    </VBox>
+                </top>
+            </BorderPane>
+        </left>
+        <center>
+            <VBox>
+                <Label fx:id="errorMessage"/>
+                <HTMLEditor fx:id="editor"/>
+            </VBox>
+        </center>
+    </BorderPane>
+</StackPane>

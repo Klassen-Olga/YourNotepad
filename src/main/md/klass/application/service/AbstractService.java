@@ -9,11 +9,10 @@ import java.util.List;
 
 public abstract class AbstractService<T extends AbstractBaseModel, A, B> {
 
-	protected Validator<T> validator;
-	protected AbstractRepository<T, A, B> repository;
+  protected Validator<T> validator;
+  protected AbstractRepository<T, A, B> repository;
 
-	public abstract List<String> validate(T model);
-	public abstract void save( T model) throws SQLException;
+  public abstract List<String> validate(T model);
 
-
+  public abstract void save(T model) throws SQLException;
 }

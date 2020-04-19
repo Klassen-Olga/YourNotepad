@@ -1,6 +1,6 @@
 package md.klass.application.navigation;
 
-public class ControllerArgument<T> {
+/*public class ControllerArgument<T> {
 	private T argument;
 
 	public ControllerArgument(T argument) {
@@ -10,4 +10,4 @@ public class ControllerArgument<T> {
 	public <T> T getArgument() {
 		return (T) argument;
 	}
-}
+}*/

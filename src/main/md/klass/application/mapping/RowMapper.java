@@ -6,5 +6,5 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface RowMapper<T extends AbstractBaseModel> {
-	T map(ResultSet resultSet) throws SQLException;
+  T map(ResultSet resultSet) throws SQLException;
 }

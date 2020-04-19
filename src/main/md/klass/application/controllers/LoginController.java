@@ -1,13 +1,21 @@
 package md.klass.application.controllers;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTextArea;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import md.klass.application.models.Account;
-import md.klass.application.navigation.ControllerArgument;
-import md.klass.application.navigation.Navigator;
+import md.klass.application.controllerarguments.LoginArgument;
+import md.klass.application.controllerarguments.NotesViewArgument;
 import md.klass.application.service.AccountService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -16,7 +24,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-public class LoginController extends AbstractController {
+public class LoginController extends AbstractController<LoginArgument> {
 
 	@FXML
 	public Button button;
@@ -24,13 +32,16 @@ public class LoginController extends AbstractController {
 	public TextField username;
 	@FXML
 	public TextField password;
-
+	@FXML
+	public StackPane bp;
 
 	public AccountService accountService;
 
 	public LoginController() {
 		accountService = new AccountService();
 	}
+
+
 
 	@FXML
 	private void login(ActionEvent event) {
@@ -48,12 +59,12 @@ public class LoginController extends AbstractController {
 				return;
 			}
 			if (new BCryptPasswordEncoder().matches(password.getText(), passwordHash)) {
-				Navigator.navigateTo("notesView", new ControllerArgument<>(account.getUsername()));
+				navigateTo("notesView", new NotesViewArgument(account.getUsername()));
 			} else {
 				printError("Username or password is wrong");
 			}
 
-		} catch (SQLException | IOException e) {
+		} catch (SQLException  e) {
 			printError("Server does not answer, come back later");
 		}
 
@@ -61,24 +72,20 @@ public class LoginController extends AbstractController {
 
 	@FXML
 	private void signup() throws IOException {
-		try {
-			Navigator.navigateTo("register");
-		}catch (IOException e){
-			printError("Server does not answer, come back later");
-		}
+		navigateTo("register");
 	}
 
 	@Override
-	public <T> void setInput(ControllerArgument<T> argument) {
-		String a = argument.getArgument();
+	public void setInput(LoginArgument argument) {
+		//is not necessary yet
 	}
+
 
 	@Override
 	public void beforeBegin() {
+		//is not necessary yet
 
 	}
 
 
-	public void foo(MouseEvent mouseEvent) {
-	}
 }

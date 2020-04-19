@@ -1,10 +1,11 @@
-.registerLabel{
+.registerLabel {
 
     -fx-padding: 0.6em;
     -fx-font-family: "DejaVu Sans Mono";
     -fx-font-size: 37px;
 }
-.registerButton{
+
+.registerButton {
     -fx-background-color: #1769a0;
     -fx-pref-width: 165.0;
     -fx-min-height: 42.0;
@@ -13,15 +14,18 @@
     -fx-text-alignment: center;
 
 }
-.vboxSignUp{
+
+.vboxSignUp {
     -fx-padding: 1.3em;
     -fx-alignment: center-right;
 }
-.loginButton:hover, .registerButton:hover{
+
+.loginButton:hover, .registerButton:hover {
     -fx-background-color: #0006ac;
 
 }
-.loginButton{
+
+.loginButton {
     -fx-padding: 1em;
     -fx-background-color: #1769a0;
     -fx-pref-width: 100.0;
@@ -31,23 +35,28 @@
     -fx-cursor: hand;
     -fx-font-size: 15;
 }
-.errorMessage{
+
+.errorMessage {
     -fx-text-fill: darkred;
 
 }
-.accountFalse{
+
+.accountFalse {
     -fx-padding: 0.3em;
-    -fx-alignment:bottom-right;
+    -fx-alignment: bottom-right;
 }
-.text-field{
+
+.text-field {
     -fx-font-size: 22;
 
 }
-.loginCenter, .loginCenterHBox{
+
+.loginCenter, .loginCenterHBox {
     -fx-alignment: center;
     -fx-padding: 10;
 }
-.loginCenterHBox{
+
+.loginCenterHBox {
     -fx-padding: 10px;
 }
 
@@ -57,36 +66,55 @@
 *NotesView
 *
 */
-.notesViewVBox{
+.notesViewVBox {
     -fx-alignment: center;
 }
-.glyph-icon{
-    -fx-font-size: 30px;
-    -fx-fill: #1769a0;
-    -fx-font-family:"FontAwesome";
-}
-.plus-button{
-    -fx-background-radius: 25px 25px;
-    -fx-text-alignment: center;
+
+.icon-button {
+    -fx-background-size: 40px 40px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-pref-width: 130px;
+    -fx-alignment: center-right;
+    -fx-pref-height: 50px;
     -fx-background-color: white;
+    -fx-background-insets: -3;
     -fx-cursor: hand;
-    -fx-alignment: center;
+    -fx-font-size: 15px;
+    -fx-font-weight: normal;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
 
 }
 
-.bluePane{
+.back-button {
+    -fx-background-image: url(../images/back.png);
+}
+
+.logout-button {
+    -fx-background-image: url(../images/logout.png);
+}
+
+.saveNote-button {
+    -fx-background-image: url(../images/save.png);
+}
+
+.deleteNote-button {
+    -fx-background-image: url(../images/bin.png);
+}
+
+.addNote-button {
+    -fx-background-image: url(../images/add.png);
+}
+
+
+.bluePane {
     -fx-padding: 1.3em;
     -fx-alignment: center-right;
 }
-.newNoteLabel{
-    -fx-label-padding: 1.3em;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-cursor: hand;
-}
-.yourNotesLabel{
+
+.yourNotesLabel {
     -fx-font-size: 14px;
     -fx-font-weight: normal;
- }
+}
 
 
