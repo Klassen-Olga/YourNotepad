@@ -34,6 +34,7 @@
         <center>
             <VBox>
                 <Label fx:id="errorMessage"/>
+                <TextField promptText="Title" fx:id="title"/>
                 <HTMLEditor fx:id="editor"/>
             </VBox>
         </center>

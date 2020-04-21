@@ -67,7 +67,23 @@
 *
 */
 .notesViewVBox {
-    -fx-alignment: center;
+    -fx-alignment: top-center;
+    -fx-pref-width: 100%;
+
+
+}
+
+.noteNode {
+    -fx-pref-height: 100px;
+    -fx-border-color: gray;
+    -fx-border-width: 0 0 0.3 0;
+    -fx-padding: 0 0 0 10;
+    -fx-font-size: 25;
+    -fx-vgrow-policy:always;
+}
+.noteNode:hover{
+    -fx-underline: false;
+    -fx-background-color: #d8d9da;
 }
 
 .icon-button {

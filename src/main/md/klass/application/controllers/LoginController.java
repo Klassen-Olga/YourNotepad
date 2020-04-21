@@ -1,12 +1,13 @@
 package md.klass.application.controllers;
 
-import com.jfoenix.controls.JFXButton;
+/*import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextArea;*/
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -45,7 +46,6 @@ public class LoginController extends AbstractController<LoginArgument> {
 
 	@FXML
 	private void login(ActionEvent event) {
-
 		Account account = new Account(username.getText(), password.getText());
 		List<String> errors = accountService.validate(account);
 		if (errors.size() > 0) {

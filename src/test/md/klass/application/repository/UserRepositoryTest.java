@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class UserRepositoryTest {
   @Test
   public void should_return_user_with_firstname_John() throws SQLException {
-    String SQL = "select * from User where firstName='John'";
+    String SQL = "select * from User where firstName='Vladlen'";
     try (Connection connection = DataSource.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL);
         ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -23,9 +23,8 @@ public class UserRepositoryTest {
         firstName = resultSet.getString(2);
         lastName = resultSet.getString(3);
 
-        assertTrue("John".equals(firstName));
-        assertTrue("Baton".equals(lastName));
-        assertEquals(10, id);
+        assertTrue("Vladlen".equals(firstName));
+        assertTrue("Popkavi4".equals(lastName));
       }
     }
   }

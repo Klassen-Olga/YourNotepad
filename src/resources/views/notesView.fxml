@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="md.klass.application.controllers.NotesViewController"
-            prefHeight="400.0" prefWidth="600.0">
+
+<BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="md.klass.application.controllers.NotesViewController">
     <left>
-        <BorderPane styleClass="bluePane" prefWidth="190.0" style="-fx-background-color: #1769a0;">
+        <BorderPane prefWidth="190.0" style="-fx-background-color: #1769a0;" styleClass="bluePane">
             <top>
                 <VBox>
-
-                    <Button styleClass="icon-button, addNote-button" onMouseClicked="#addNewNote" text="Add New"/>
-                    <Button styleClass="icon-button, logout-button" onMouseClicked="#logout" text="Logout">
+                    <Button onMouseClicked="#addNewNote" styleClass="icon-button, addNote-button" text="Add New"/>
+                    <Button onMouseClicked="#logout" styleClass="icon-button, logout-button" text="Logout">
                         <VBox.margin>
                             <Insets top="30.0"/>
                         </VBox.margin>
                     </Button>
                 </VBox>
-
-
             </top>
         </BorderPane>
     </left>
     <center>
-        <VBox styleClass="notesViewVBox" fx:id="container">
-            <Label styleClass="yourNotesLabel" text="Your notes: " fx:id="yourNotes"/>
-        </VBox>
+        <ScrollPane fx:id="scroll">
+            <VBox fx:id="container" styleClass="notesViewVBox">
+                <Label fx:id="yourNotes" styleClass="yourNotesLabel"/>
+            </VBox>
+        </ScrollPane>
+
+
     </center>
 
 

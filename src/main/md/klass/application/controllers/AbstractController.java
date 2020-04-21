@@ -1,19 +1,18 @@
 package md.klass.application.controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
+
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
+import javafx.scene.control.TextInputDialog;
+import javafx.stage.StageStyle;
 import md.klass.application.controllerarguments.AbstractControllerArgument;
 import md.klass.application.navigation.Navigator;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.Optional;
 
 public abstract class AbstractController<T extends AbstractControllerArgument> {
 
@@ -70,40 +69,31 @@ public abstract class AbstractController<T extends AbstractControllerArgument> {
     }
   }
 
-  /** @return true if user pressed ok, otherwise false */
-  public boolean showInfoDialogWithOkAndCancelButton(String heading, String text, StackPane pane) {
-    JFXDialogLayout content = new JFXDialogLayout();
-    AtomicBoolean result = new AtomicBoolean();
-    content.setHeading(new Text(heading));
-    content.setBody(new Text(text));
-    JFXDialog dialog = new JFXDialog(pane, content, JFXDialog.DialogTransition.CENTER);
-    JFXButton okButton = new JFXButton("Okay");
-    JFXButton cancelButton = new JFXButton("Cancel");
-    okButton.setOnAction(
-        event -> {
-          dialog.close();
-          result.set(true);
-        });
-    cancelButton.setOnAction(
-        event -> {
-          dialog.close();
-          result.set(false);
-        });
-    content.setActions(okButton, cancelButton);
-    dialog.show();
-    return result.get();
+  /**
+   * @return true if user pressed ok, otherwise false
+   */
+  public boolean showInfoDialogWithOkAndCancelButton(String heading) {
+    Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setHeaderText(heading);
+    alert.setTitle("Please confirm");
+    alert.setContentText(null);
+    alert.initStyle(StageStyle.DECORATED);
+    Optional<ButtonType> result=alert.showAndWait();
+    if(result.get()==ButtonType.OK){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
-  public String getTextFieldFromUserWithDialog(String heading, StackPane pane) {
-    JFXDialogLayout content = new JFXDialogLayout();
-    TextField textField = new TextField();
-    content.setHeading(new Text(heading));
-    content.setBody(textField);
-    JFXDialog dialog = new JFXDialog(pane, content, JFXDialog.DialogTransition.CENTER);
-    JFXButton button = new JFXButton("Okay");
-    button.setOnAction(event -> dialog.close());
-    content.setActions(button);
-    dialog.show();
-    return textField.getText();
+  public String getTextFieldFromUserWithDialog(String heading) {
+    String[] title= new String[1];
+    TextInputDialog dialog=new TextInputDialog();
+    dialog.setHeaderText(heading);
+    dialog.setTitle("Title");
+    Optional<String> result=dialog.showAndWait();
+    result.ifPresent(name ->title[0]= name);
+    return title[0];
   }
 }

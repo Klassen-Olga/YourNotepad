@@ -28,4 +28,7 @@ public class Note extends AbstractBaseModel {
   public String getHtml() {
     return html;
   }
+  public void setTitle(String title){
+    this.title=title;
+  }
 }

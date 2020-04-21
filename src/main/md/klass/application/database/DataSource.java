@@ -12,8 +12,8 @@ public class DataSource {
 
   static {
     config.setJdbcUrl("jdbc:mysql://localhost:3306/YourNotepad?useSSL=false");
-    config.setUsername("debian-sys-maint");
-    config.setPassword("G65C1J4iIxMIxVgF");
+    config.setUsername("root");
+    config.setPassword("root");
     config.addDataSourceProperty("cachePrepStmts", "true");
     config.addDataSourceProperty("prepStmtCacheSize", "250");
     config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
