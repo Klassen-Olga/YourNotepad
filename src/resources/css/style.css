@@ -86,6 +86,11 @@
     -fx-background-color: #d8d9da;
 }
 
+/*
+*
+*Button icons
+*
+*/
 .icon-button {
     -fx-background-size: 40px 40px;
     -fx-background-repeat: no-repeat;
@@ -131,6 +136,16 @@
 .yourNotesLabel {
     -fx-font-size: 14px;
     -fx-font-weight: normal;
+}
+/*
+*
+*NotesView
+*
+*/
+.lastUpdatedAt{
+    -fx-fill: white;
+    -fx-font-size: 15px;
+
 }
 
 

@@ -4,19 +4,20 @@ package md.klass.application.controllers;
 import com.jfoenix.controls.JFXDialogLayout;*/
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.scene.web.HTMLEditor;
 import md.klass.application.controllerarguments.NoteArgument;
 import md.klass.application.controllerarguments.NotesViewArgument;
 import md.klass.application.models.Account;
 import md.klass.application.models.Note;
-import md.klass.application.navigation.Navigator;
 import md.klass.application.service.AccountService;
 import md.klass.application.service.NoteService;
 
@@ -31,7 +32,8 @@ public class NoteController extends AbstractController<NoteArgument> {
     public StackPane stackPane;
     @FXML
     public TextField title;
-
+    @FXML
+    public Text lastUpdatedAt;
     private String username;
     private int noteId;
 
@@ -106,15 +108,28 @@ public class NoteController extends AbstractController<NoteArgument> {
      */
     @Override
     public void beforeBegin() {
+        //set default height for editor
+        VBox.setVgrow(editor, Priority.ALWAYS);
+        editor.setMaxHeight(Double.MAX_VALUE);
+        //if note already existed output text
         if (noteId != 0) {
             try {
                 this.note = noteService.findNoteViaId(noteId);
                 editor.setHtmlText(note.getHtml());
                 title.setText(this.note.getTitle());
+                String lua=this.note.getLastUpdateAt().toString();
+
+                lastUpdatedAt.setText("Last updated at:\n "+ lua.replace('T', ' '));
             } catch (SQLException e) {
                 printError("Server does not answer, come back later");
             }
         }
+        //set a key combination ctrl+s to save the note
+        editor.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode()==KeyCode.S && event.isControlDown()){
+                this.saveNote();
+            }
+        });
 
     }
 

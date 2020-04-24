@@ -11,14 +11,14 @@ public class DataSource {
   private static HikariDataSource ds;
 
   static {
-    config.setJdbcUrl("jdbc:mysql://localhost:3306/YourNotepad?useSSL=false");
-    config.setUsername("root");
-    config.setPassword("root");
-    config.addDataSourceProperty("cachePrepStmts", "true");
-    config.addDataSourceProperty("prepStmtCacheSize", "250");
-    config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-    ds = new HikariDataSource(config);
-    config.addDataSourceProperty("autoCommit", false);
+      config.setJdbcUrl("jdbc:mysql://localhost:3306/YourNotepad?allowPublicKeyRetrieval=true&useSSL=false");
+      config.setUsername("root");
+      config.setPassword("root");
+      config.addDataSourceProperty("cachePrepStmts", "true");
+      config.addDataSourceProperty("prepStmtCacheSize", "250");
+      config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+      ds = new HikariDataSource(config);
+      config.addDataSourceProperty("autoCommit", false);
   }
 
   private DataSource() {}

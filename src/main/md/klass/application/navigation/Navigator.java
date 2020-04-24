@@ -53,4 +53,7 @@ public class Navigator {
     }
     return Navigator.navigator;
   }
+  public static Stage getStage(){
+    return primaryStage;
+  }
 }

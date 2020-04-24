@@ -43,3 +43,7 @@ ALTER TABLE Note
         REFERENCES Account (id);
 ALTER TABLE Account
     ADD UNIQUE KEY (username);
+
+insert into User(firstName, lastName) values('Olga', 'Klassen');
+insert into Account(username, password, userId) values ('ok', '$2a$10$qMD0LhTZ6ty9YivYT9bkVOBEVsitxiNNp9m3DNifXUdEREmDLVFom',1);-- password: 123qwe
+insert into Note(title, html, accountId) values('My note', '<h1>Hello</h1>', 1);

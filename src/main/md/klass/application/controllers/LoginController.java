@@ -4,22 +4,22 @@ package md.klass.application.controllers;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextArea;*/
+
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
-import md.klass.application.models.Account;
+import javafx.stage.FileChooser;
 import md.klass.application.controllerarguments.LoginArgument;
 import md.klass.application.controllerarguments.NotesViewArgument;
+import md.klass.application.models.Account;
+import md.klass.application.navigation.Navigator;
 import md.klass.application.service.AccountService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -42,6 +42,14 @@ public class LoginController extends AbstractController<LoginArgument> {
 		accountService = new AccountService();
 	}
 
+	void uploadFile() throws IOException{
+		final FileChooser fileChooser = new FileChooser();
+		File file = fileChooser.showOpenDialog(Navigator.getStage());
+		FileWriter fw = new FileWriter(file);
+
+
+
+	}
 
 
 	@FXML

@@ -52,8 +52,8 @@ public class UserRepositoryTest {
       while (resultSet.next()) {
         accountId = resultSet.getInt(1);
       }
-      assertEquals(1, userId);
-      assertEquals(1, accountId);
+      assertEquals(2, userId);
+      assertEquals(2, accountId);
     }
   }
 }

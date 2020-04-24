@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
 <?import javafx.scene.web.HTMLEditor?>
 <StackPane fx:id="stackPane" prefHeight="476.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
            xmlns:fx="http://javafx.com/fxml/1" fx:controller="md.klass.application.controllers.NoteController">
@@ -13,7 +14,7 @@
                     <VBox>
                         <Button styleClass="icon-button, saveNote-button" text="Save" onMouseClicked="#saveNote">
                             <VBox.margin>
-                                <Insets bottom="30.0"/>
+                                <Insets bottom="30.0" top="40.0"/>
                             </VBox.margin>
                         </Button>
                         <Button styleClass="icon-button, back-button" onMouseClicked="#goBackward" text="Back">
@@ -29,6 +30,13 @@
                         <Button styleClass="icon-button, deleteNote-button" onMouseClicked="#delete" text="Delete"/>
                     </VBox>
                 </top>
+                <bottom>
+                    <Text styleClass="lastUpdatedAt" fx:id="lastUpdatedAt">
+                        <VBox.margin>
+                            <Insets bottom="30.0"/>
+                        </VBox.margin>
+                    </Text>
+                </bottom>
             </BorderPane>
         </left>
         <center>

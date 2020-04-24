@@ -4,9 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -16,7 +13,6 @@ import md.klass.application.models.Note;
 import md.klass.application.service.NoteService;
 
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 

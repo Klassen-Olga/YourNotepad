@@ -5,10 +5,8 @@ import md.klass.application.mapping.RowMapper;
 import md.klass.application.models.Account;
 import md.klass.application.models.Note;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +43,12 @@ public class NoteRepository extends AbstractRepository<Note, Integer, String>
     String title = resultSet.getString(2);
     String html = resultSet.getString(3);
     int accountId = resultSet.getInt(4);
-    return new Note(id, title, html, accountId);
+    String lastUpdatedAt=resultSet.getString(6);
+    Timestamp convertedDateAndTime=Timestamp.valueOf(lastUpdatedAt);
+    LocalDateTime localDateTime=convertedDateAndTime.toLocalDateTime();
+    Note note=new Note(id, title, html, accountId);
+    note.setLastUpdateAt(localDateTime);
+    return note;
   }
 
   /**

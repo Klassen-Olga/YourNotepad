@@ -1,10 +1,12 @@
 package md.klass.application.models;
 
+import java.time.LocalDateTime;
+
 public class Note extends AbstractBaseModel {
   private String title;
   private String html;
   private int accountId;
-
+  private LocalDateTime lastUpdateAt;
   public int getAccountId() {
     return accountId;
   }
@@ -28,7 +30,10 @@ public class Note extends AbstractBaseModel {
   public String getHtml() {
     return html;
   }
-  public void setTitle(String title){
-    this.title=title;
+  public void setLastUpdateAt(LocalDateTime lastUpdateAt){
+    this.lastUpdateAt=lastUpdateAt;
+  }
+  public LocalDateTime getLastUpdateAt(){
+    return this.lastUpdateAt;
   }
 }
